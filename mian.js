@@ -29,7 +29,7 @@ window.addEventListener("click", (e) => {
 });
 
 const allChoices = ["scissors", "rock", "paper"];
-
+score.innerHTML = window.localStorage.getItem("score");
 icons.forEach((e) => {
   e.addEventListener("click", () => {
     let housePlayerIndex = Math.floor(Math.random() * 3);
@@ -63,10 +63,12 @@ icons.forEach((e) => {
     ) {
       whoWin.innerHTML = "YOU LOSE";
       scoreTotal -= 1;
+      fromLocalStorage(scoreTotal);
       showScoreTotal();
     } else {
       whoWin.innerHTML = "YOU WON";
       scoreTotal += 1;
+      fromLocalStorage(scoreTotal);
       showScoreTotal();
     }
     playAgain.addEventListener("click", () => {
@@ -78,3 +80,6 @@ icons.forEach((e) => {
     });
   });
 });
+function fromLocalStorage(scoreCount) {
+  window.localStorage.setItem("score", scoreCount);
+}
